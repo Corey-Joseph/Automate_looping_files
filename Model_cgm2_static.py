@@ -2,7 +2,6 @@
 import pyCGM2; LOGGER = pyCGM2.LOGGER
 import os
 import sys
-
 import pyCGM2
 from pyCGM2.Utils import files
 from pyCGM2.Tools import btkTools
@@ -25,6 +24,7 @@ settings = files.loadModelSettings(pyCGM2_path + "\\Settings", "CGM1-pyCGM2.sett
 print(settings)
 # CALIBRATION--------------------------------
 staticFile ="CPD8743248 - MCLA Cal 02.c3d"
+#staticFile = []
 acqStatic = btkTools.smartReader(DATA_PATH+staticFile)
 
 # choice of options
@@ -99,7 +99,7 @@ model,finalAcqStatic,error = cgm1.calibrate(DATA_PATH,
     markerDiameter,
     pointSuffix)
 
-# FITTING ----------------------------------------------------------
+#FITTING ----------------------------------------------------------
 trialName = "MCLA Initial Ax  CGM2 BF02.c3d"
 
 momentProjection = enums.enumFromtext(settings["Fitting"]["Moment Projection"],enums.MomentProjection)
@@ -119,3 +119,4 @@ acqGait,detectAnomaly = cgm1.fitting(model,DATA_PATH, trialName,
     frameInit= None, frameEnd= None )
 
 btkTools.smartWriter(acqGait, DATA_PATH+trialName[:-4]+"-modelled.c3d")
+print("Model",model)

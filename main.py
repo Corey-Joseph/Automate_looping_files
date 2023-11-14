@@ -20,3 +20,15 @@ parent_folder_path = 'C:\\Users\\Helen laptop\\Documents\\CGM2project\\Data\\'
 filenames = []  #ASSUMING I NEED THIS TO READ FILENAME AND RUN CGM2 ON THAT FILE
 
 staticfile = []
+
+cal_files = loop_build_filename_list(parent_folder_path)
+
+for file_name in calfile_list:
+    file_path = os.path.join(directory, file_name)
+    with open(file_path, 'r') as file:
+        file_contents = file.read()
+        # Perform operations on file_contents or run code on the file as needed
+        script_to_run = cgm2s  # Replace with the name of your Python script
+        # Execute the Python script with the file name as an argument
+        subprocess.run(['python', script_to_run, file_path, calfile_list])
+        print(f"Processing file '{file_name}':\n{file_contents}")
