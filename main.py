@@ -1,5 +1,6 @@
 import Model_cgm2_static as cgm2s
 import Loop_build_filename_list as fnl
+import os
 
 #THINGS TO MAKE SURE OF
 #1 NEED TO CHECK THE BELOW TO MAKE SURE IT READS THE ACUTAL MP
@@ -17,14 +18,16 @@ pyCGM2_path = 'C:\\Users\\Helen laptop\\Documents\\CGM2project\\Automate_looping
 
 parent_folder_path = 'C:\\Users\\Helen laptop\\Documents\\CGM2project\\Data\\'
 
-filenames = []  #ASSUMING I NEED THIS TO READ FILENAME AND RUN CGM2 ON THAT FILE
+filenames = []  #?ASSUMING I NEED THIS TO READ FILENAME AND RUN CGM2 ON THAT FILE
 
 staticfile = []
 
-cal_files = loop_build_filename_list(parent_folder_path)
+calfile_list = [] #?need to define
+
+cal_files = fnl(parent_folder_path)
 
 for file_name in calfile_list:
-    file_path = os.path.join(directory, file_name)
+    file_path = os.path.join(parent_folder_path, file_name)
     with open(file_path, 'r') as file:
         file_contents = file.read()
         # Perform operations on file_contents or run code on the file as needed
