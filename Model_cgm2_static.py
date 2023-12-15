@@ -7,6 +7,7 @@ from pyCGM2.Utils import files
 from pyCGM2.Tools import btkTools
 from pyCGM2.ForcePlates import forceplates
 from pyCGM2 import enums
+from pyCGM2.Nexus import vskTools
 
 #NEED TO SELECT WHICH MODEL RUNNING
 #from pyCGM2.Lib.CGM import cgm2_1
@@ -37,41 +38,10 @@ markerDiameter = settings["Global"]["Marker diameter"]
 #HJC = settings["Calibration"]["HJC"]
 pointSuffix = settings["Global"]["Point suffix"]
 
-#NEED TO CHECK THE BELOW TO MAKE SURE IT READS THE ACUTAL MP
-#FILE FOR THE SUBJECT OR WHETHER IT JUST USES THE MANUALLY
-#ENTERED DATA HERE
 
-# definitions from mp from metadata
-required_mp = dict()
-required_mp["Bodymass"] = 75.0
-required_mp["Height"]= 1750
-required_mp["LeftLegLength"] = 800
-required_mp["LeftKneeWidth"] = 90
-required_mp["RightLegLength"] = 800
-required_mp["RightKneeWidth"] = 90
-required_mp["LeftAnkleWidth"] = 60
-required_mp["RightAnkleWidth"] = 60
-required_mp["LeftSoleDelta"] = 0
-required_mp["RightSoleDelta"] = 0
-required_mp["LeftShoulderOffset"] = 0
-required_mp["LeftElbowWidth"] = 0
-required_mp["LeftWristWidth"] = 0
-required_mp["LeftHandThickness"] = 0
-required_mp["RightShoulderOffset"] = 0
-required_mp["RightElbowWidth"] = 0
-required_mp["RightWristWidth"] = 0
-required_mp["RightHandThickness"]= 0
-
-optional_mp = dict()
-optional_mp["InterAsisDistance"]= 0
-optional_mp["LeftAsisTrocanterDistance"]= 0
-optional_mp["LeftTibialTorsion"]= 0
-optional_mp["LeftThighRotation"]= 0
-optional_mp["LeftShankRotation"]= 0
-optional_mp["RightAsisTrocanterDistance"]= 0
-optional_mp["RightTibialTorsion"]= 0
-optional_mp["RightThighRotation"]= 0
-optional_mp["RightShankRotation"]= 0
+#Get MP data from vsk file
+vsk = vskTools.Vsk(DATA_PATH + "New Subject.vsk")
+required_mp,optional_mp = vskTools.getFromVskSubjectMp(vsk, resetFlag=True)
 
 
 #model,finalAcqStatic,error = cgm2_1.calibrate(DATA_PATH,
